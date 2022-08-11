@@ -16,21 +16,21 @@ class FamilyStructure:
         # example list of members
         self._members = [
             {
-                "id": self._generateId(),
+                "id": 1,
                 "first_name": "John",
                 "last_name": "Jackson",
                 "age": 33,
                 "lucky_numbers": [7, 13, 22],
             },
                 {
-                "id": self._generateId(),
+                "id": 2,
                 "first_name": "Jane ",
                 "last_name": "Jackson",
                 "age": 35,
                 "lucky_numbers": [10, 14, 3],
             },
                 {
-                "id": self._generateId(),
+                "id": 3,
                 "first_name": "Jimmy ",
                 "last_name": "Jackson",
                 "age": 5,
@@ -48,13 +48,16 @@ class FamilyStructure:
         # fill this method and update the return
     def delete_member(self, id):
         for member in self._members:
-            if member.id == id:
-                self._members.remove(member)
+            if member["id"] == id:
+                deletemember = member
+        return self._members.remove(deletemember)
 
     def get_member(self, id):
         for member in self._members:
-            if member.id == id:
-                return member
+            if member["id"] == id:
+                onemember = member
+        return onemember
+
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
         return self._members

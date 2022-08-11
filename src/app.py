@@ -25,11 +25,29 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/members/<int:member_id>', methods=['GET'])
-def add_member():
+@app.route('/members', methods=['GET'])
+def get_members():
     members = jackson_family.get_all_members()
     response_body = {"family": members}
     return jsonify(response_body), 200
+
+@app.route('/members/<int:member_id>', methods=['GET'])
+def add_one_member(member_id):
+    member = jackson_family.get_member(member_id)
+    response_body = {"member": member}
+    return jsonify(response_body), 200
+
+@app.route('/members', methods=['POST'])
+def add_newMember():
+    newuser = request.json
+    newuser["id"] = jackson_family._generateId()
+    jackson_family.add_member(newuser)
+    return "miembro añadido",200
+
+@app.route('/members/<int:member_id>', methods=['DELETE'])
+def deleteMember(member_id):
+    jackson_family.delete_member(member_id)
+    return "delete",200
 
 
 

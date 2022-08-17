@@ -44,7 +44,6 @@ def get_member(id):
 @app.route('/member', methods=['POST'])
 def add_newMember():
     newuser = request.json
-    newuser["id"] = jackson_family._generateId()
     jackson_family.add_member(newuser)
     print(newuser)
     return "miembro añadido",200

@@ -104,9 +104,10 @@ def test_delete_response(client):
 		"lucky_numbers": [34,65,23,4,6]
 	})
     response = client.delete('/member/3443')
+    assert response.json["done"] == True
 
 @pytest.mark.it("After deleting the member 3443 we called GET /members and it should return a list with 4 members")
 def test_get_members_returns_list_of_four(client):
     response = client.get('/members')
     members = json.loads(response.data)
-    assert len(members) == 5
+    assert len(members) == 4

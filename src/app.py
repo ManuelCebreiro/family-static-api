@@ -28,18 +28,17 @@ def sitemap():
 @app.route('/members', methods=['GET'])
 def get_members():
     members = jackson_family.get_all_members()
-
+    
     return jsonify(members), 200
 
 @app.route('/member/<int:id>', methods=['GET'])
 def get_member(id):
     member = jackson_family.get_member(id)
-    print(member)
+
     if member:
         return jsonify(member),200
     else:
-        return jsonify({"error": "error"}),404
-
+        return jsonify({"error"}),404
 
 
 @app.route('/member', methods=['POST'])
@@ -47,6 +46,7 @@ def add_newMember():
     newuser = request.json
     newuser["id"] = jackson_family._generateId()
     jackson_family.add_member(newuser)
+    print(newuser)
     return "miembro añadido",200
 
 @app.route('/member/<int:id>', methods=['DELETE'])
